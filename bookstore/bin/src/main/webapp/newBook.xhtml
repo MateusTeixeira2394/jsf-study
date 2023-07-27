@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>New Book</title>
+</h:head>
+<h:body>
+	<h1>New Book</h1>
+
+	<h:form>
+		<fieldset>
+			<legend>Book datas:</legend>
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Title:" for="title" />
+				<h:inputText id="title" value="#{bookBean.book.title}" />
+
+				<h:outputLabel value="Type:" for="type" />
+				<h:inputText id="type" value="#{bookBean.book.type}" />
+
+				<h:outputLabel value="Release date:" for="date" />
+				<h:inputText id="date" value="#{bookBean.book.date}"/>
+
+				<h:outputLabel value="Price:" for="price" />
+				<h:inputText id="price" value="#{bookBean.book.price}"/>
+
+				<h:commandButton value="create" action="#{bookBean.create}" />
+
+			</h:panelGrid>
+		</fieldset>
+	</h:form>
+
+</h:body>
+</html>

@@ -4,26 +4,24 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.devteixeira.bookstore.config.db.ConnectionFactory;
-import br.com.devteixeira.bookstore.entities.BookEntity;
+import br.com.devteixeira.bookstore.entities.AuthorEntity;
 
-public class BookDAO {
+public class AuthorDAO {
 	
 	private EntityManager em;
 	
-	public BookDAO() {
+	public AuthorDAO() {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("bookstore");
 		em = factory.createEntityManager();
 	}
-	
-	public void create(BookEntity book) {
+
+	public void create(AuthorEntity author) {
 		
 		em.getTransaction().begin();
-		em.persist(book);
+		em.persist(author);
 		em.getTransaction().commit();
 		em.close();
 		
-		
 	}
-	
+
 }

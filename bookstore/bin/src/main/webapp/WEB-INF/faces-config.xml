@@ -9,11 +9,5 @@
 		<managed-bean-class>br.com.devteixeira.bookstore.beans.BookBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
-	
-	<managed-bean>
-		<managed-bean-name>authorBean</managed-bean-name>
-		<managed-bean-class>br.com.devteixeira.bookstore.beans.AuthorBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
 
 </faces-config>
