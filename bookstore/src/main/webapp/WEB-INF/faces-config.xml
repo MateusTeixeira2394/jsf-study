@@ -7,7 +7,7 @@
 	<managed-bean>
 		<managed-bean-name>bookBean</managed-bean-name>
 		<managed-bean-class>br.com.devteixeira.bookstore.beans.BookBean</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	
 	<managed-bean>

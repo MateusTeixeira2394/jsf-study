@@ -2,11 +2,13 @@ package br.com.devteixeira.bookstore.entities;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,17 @@ public class BookEntity {
 	private String type;
 	private Date date;
 	private BigDecimal price;
+	
+	@ManyToMany
+	private List<AuthorEntity> authors;
+	
+	public List<AuthorEntity> getAuthors() {
+		return authors;
+	}
+	
+	public void setAuthors(List<AuthorEntity> authors) {
+		this.authors = authors;
+	}
 	
 	public long getId() {
 		return id;
