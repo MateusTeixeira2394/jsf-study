@@ -11,28 +11,31 @@
 	<h1>New Book</h1>
 
 	<h:form>
+		<h:messages />
 		<fieldset>
 			<legend>Book datas:</legend>
 			<h:panelGrid columns="2">
-
 				<h:outputLabel value="Title:" for="title" />
-				<h:inputText id="title" value="#{bookBean.book.title}" />
+				<h:inputText id="title" value="#{bookBean.book.title}"
+					required="true" requiredMessage="The title can't be empty"
+					validatorMessage="The title must be between 3 and 40 characters">
+					<f:validateLength maximum="40" minimum="3" />
+				</h:inputText>
 
 				<h:outputLabel value="Type:" for="type" />
-				<h:inputText id="type" value="#{bookBean.book.type}" />
+				<h:inputText id="type" value="#{bookBean.book.type}" required="true" requiredMessage="The type can't be empty" />
 
 				<h:outputLabel value="Release date:" for="date" />
-				<h:inputText id="date" value="#{bookBean.book.date}" />
+				<h:inputText id="date" value="#{bookBean.book.date}" validator="#{bookBean.mustBeValidDateValidator}" required="true" requiredMessage="The release date can't be empty" />
 
 				<h:outputLabel value="Price:" for="price" />
-				<h:inputText id="price" value="#{bookBean.book.price}" />
+				<h:inputText id="price" value="#{bookBean.book.price}" validator="#{bookBean.mustBePositiveNumberValidator}" required="true" requiredMessage="The release date can't be empty" />
 
 				<h:commandButton value="create" action="#{bookBean.create}" />
-
 			</h:panelGrid>
 		</fieldset>
 		<fieldset>
-		
+
 			<legend>Author datas:</legend>
 			<h:outputLabel value="Choose the author:" for="author" />
 			<h:selectOneMenu value="#{bookBean.authorId}">
@@ -46,7 +49,7 @@
 					<h:outputText value="#{author.name}" />
 				</h:column>
 			</h:dataTable>
-			
+
 		</fieldset>
 	</h:form>
 
