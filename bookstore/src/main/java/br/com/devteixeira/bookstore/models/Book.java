@@ -20,6 +20,15 @@ public class Book {
 		authors = new ArrayList<Author>();
 	}
 	
+	public Book(String title, String type, String date, BigDecimal price) {
+		super();
+		this.title = title;
+		this.type = type;
+		this.date = date;
+		this.price = price;
+		this.authors = new ArrayList<Author>();
+	}
+
 	public List<Author> getAuthors() {
 		return authors;
 	}

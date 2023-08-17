@@ -23,13 +23,18 @@
 				</h:inputText>
 
 				<h:outputLabel value="Type:" for="type" />
-				<h:inputText id="type" value="#{bookBean.book.type}" required="true" requiredMessage="The type can't be empty" />
+				<h:inputText id="type" value="#{bookBean.book.type}" required="true"
+					requiredMessage="The type can't be empty" />
 
 				<h:outputLabel value="Release date:" for="date" />
-				<h:inputText id="date" value="#{bookBean.book.date}" validator="#{bookBean.mustBeValidDateValidator}" required="true" requiredMessage="The release date can't be empty" />
+				<h:inputText id="date" value="#{bookBean.book.date}"
+					validator="#{bookBean.mustBeValidDateValidator}" required="true"
+					requiredMessage="The release date can't be empty" />
 
 				<h:outputLabel value="Price:" for="price" />
-				<h:inputText id="price" value="#{bookBean.book.price}" validator="#{bookBean.mustBePositiveNumberValidator}" required="true" requiredMessage="The release date can't be empty" />
+				<h:inputText id="price" value="#{bookBean.book.price}"
+					validator="#{bookBean.mustBePositiveNumberValidator}"
+					required="true" requiredMessage="The price can't be empty" />
 
 				<h:commandButton value="create" action="#{bookBean.create}" />
 			</h:panelGrid>
@@ -52,6 +57,31 @@
 
 		</fieldset>
 	</h:form>
+
+	<fieldset>
+
+		<legend>List of books:</legend>
+
+		<h:dataTable value="#{bookBean.books}" var="book">
+			<h:column>
+				<f:facet name="header">Title</f:facet>
+            #{book.title}
+        </h:column>
+			<h:column>
+				<f:facet name="header">Type</f:facet>
+            #{book.type}
+        </h:column>
+			<h:column>
+				<f:facet name="header">Release Date</f:facet>
+            #{book.date}
+        </h:column>
+			<h:column>
+				<f:facet name="header">Price</f:facet>
+            #{book.price}
+        </h:column>
+		</h:dataTable>
+
+	</fieldset>
 
 </h:body>
 </html>

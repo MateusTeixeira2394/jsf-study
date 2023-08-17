@@ -3,6 +3,7 @@ package br.com.devteixeira.bookstore.beans;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -22,10 +23,12 @@ import br.com.devteixeira.bookstore.services.BookService;
 public class BookBean {
 
 	private Book book;
+	private List<Book> books;
 	private List<Author> authors;
 	private Long authorId;
 	private BookService bookService;
 	private AuthorService authorService;
+	private HashMap<Long, Author> authorMap = new HashMap<>();
 	
 	public BookBean() {
 		
@@ -34,6 +37,7 @@ public class BookBean {
 		authorService = new AuthorService();
 		
 		authors = authorService.getAll();
+		books = bookService.getAll();
 		
 	}
 
@@ -51,10 +55,22 @@ public class BookBean {
 		
 	}
 	
-	public void saveAuthor() {
+	public void saveAuthor() throws ValidatorException {
 		
-		Author author = authorService.getById(authorId);		
+		Author author = authorService.getById(authorId);
+		
+		authorsValidator(author);
+		
 		this.book.getAuthors().add(author);
+		this.authorMap.put(authorId, author);
+		
+	}
+	
+	private void authorsValidator(Author newAuthor) throws ValidatorException {
+		
+		if(authorMap.containsKey(newAuthor.getId())) {
+			throw new ValidatorException(new FacesMessage("The author has already added")); 
+		}
 		
 	}
 	
@@ -117,6 +133,14 @@ public class BookBean {
 
 	public void setAuthors(List<Author> authors) {
 		this.authors = authors;
+	}
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 
 }
