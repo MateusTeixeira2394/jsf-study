@@ -11,7 +11,9 @@
 	<h1>New Book</h1>
 
 	<h:form>
-		<h:messages />
+
+		<h:messages id="validationMessages" />
+
 		<fieldset>
 			<legend>Book datas:</legend>
 			<h:panelGrid columns="2">
@@ -20,67 +22,78 @@
 					required="true" requiredMessage="The title can't be empty"
 					validatorMessage="The title must be between 3 and 40 characters">
 					<f:validateLength maximum="40" minimum="3" />
+					<f:ajax event="blur" render="validationMessages" />
 				</h:inputText>
 
 				<h:outputLabel value="Type:" for="type" />
 				<h:inputText id="type" value="#{bookBean.book.type}" required="true"
-					requiredMessage="The type can't be empty" />
+					requiredMessage="The type can't be empty">
+					<f:ajax event="blur" render="validationMessages" />
+				</h:inputText>
 
 				<h:outputLabel value="Release date:" for="date" />
 				<h:inputText id="date" value="#{bookBean.book.date}"
 					validator="#{bookBean.mustBeValidDateValidator}" required="true"
-					requiredMessage="The release date can't be empty" />
+					requiredMessage="The release date can't be empty">
+					<f:ajax event="blur" render="validationMessages" />
+				</h:inputText>
 
 				<h:outputLabel value="Price:" for="price" />
 				<h:inputText id="price" value="#{bookBean.book.price}"
 					validator="#{bookBean.mustBePositiveNumberValidator}"
-					required="true" requiredMessage="The price can't be empty" />
+					required="true" requiredMessage="The price can't be empty">
+					<f:ajax event="blur" render="validationMessages" />
+				</h:inputText>
 
-				<h:commandButton value="create" action="#{bookBean.create}" />
+				<h:commandButton value="create" action="#{bookBean.create}">
+					<f:ajax execute="@form" render="@form :booksTable"/>
+				</h:commandButton>
 			</h:panelGrid>
 		</fieldset>
-		<fieldset>
 
+		<fieldset>
 			<legend>Author datas:</legend>
 			<h:outputLabel value="Choose the author:" for="author" />
-			<h:selectOneMenu value="#{bookBean.authorId}">
+			<h:selectOneMenu value="#{bookBean.authorId}" id="author">
 				<f:selectItems value="#{bookBean.authors}" var="author"
 					itemLabel="#{author.name}" itemValue="#{author.id}" />
 			</h:selectOneMenu>
-			<h:commandButton value="add author" action="#{bookBean.saveAuthor}" />
+			<h:commandButton value="add author" action="#{bookBean.saveAuthor}">
+				<f:ajax execute="author" render="authorsTable validationMessages" />
+			</h:commandButton>
 			<h3>Authors:</h3>
-			<h:dataTable value="#{bookBean.book.authors}" var="author">
+			<h:dataTable value="#{bookBean.book.authors}" var="author"
+				id="authorsTable">
 				<h:column>
 					<h:outputText value="#{author.name}" />
 				</h:column>
 			</h:dataTable>
-
 		</fieldset>
 	</h:form>
 
 	<fieldset>
-
 		<legend>List of books:</legend>
-
-		<h:dataTable value="#{bookBean.books}" var="book">
+		<h:dataTable value="#{bookBean.books}" var="book" id="booksTable">
 			<h:column>
 				<f:facet name="header">Title</f:facet>
-            #{book.title}
-        </h:column>
+				<h:outputText value="#{book.title}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Type</f:facet>
-            #{book.type}
-        </h:column>
+				<h:outputText value="#{book.type}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Release Date</f:facet>
-            #{book.date}
-        </h:column>
+				<h:outputText value="#{book.date}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Price</f:facet>
-            #{book.price}
-        </h:column>
+				<h:outputText value="#{book.price}">
+					<f:convertNumber type="currency" pattern="R$ #0.00"
+						currencySymbol="R$" locale="pt_BR" />
+				</h:outputText>
+			</h:column>
 		</h:dataTable>
-
 	</fieldset>
 
 </h:body>

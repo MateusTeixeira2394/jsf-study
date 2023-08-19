@@ -43,15 +43,14 @@ public class BookBean {
 
 	public void create() {
 		
-		try {
+		if(book.getAuthors().isEmpty()) {
 			
-			bookService.create(book);
+			FacesContext.getCurrentInstance().addMessage("author", new FacesMessage("This book must have at least one author"));
 			
-		} catch (RuntimeException e) {
-			
-			System.out.println(e.getMessage());
-			
+			return;
 		}
+		
+		bookService.create(book);
 		
 	}
 	
@@ -59,20 +58,17 @@ public class BookBean {
 		
 		Author author = authorService.getById(authorId);
 		
-		authorsValidator(author);
+		if(authorMap.containsKey(author.getId())) {
+			FacesContext.getCurrentInstance().addMessage("author", new FacesMessage("The author has already added"));
+			return;
+		}
 		
 		this.book.getAuthors().add(author);
 		this.authorMap.put(authorId, author);
 		
 	}
 	
-	private void authorsValidator(Author newAuthor) throws ValidatorException {
-		
-		if(authorMap.containsKey(newAuthor.getId())) {
-			throw new ValidatorException(new FacesMessage("The author has already added")); 
-		}
-		
-	}
+	
 	
 	public void mustBePositiveNumberValidator(FacesContext fc, UIComponent component, Object inputValue) throws ValidatorException {
 		
