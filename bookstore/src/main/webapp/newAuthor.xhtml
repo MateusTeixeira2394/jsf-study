@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>New Author</title>
-</h:head>
-<h:body>
-	<h1>New Author</h1>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:form>
-		<fieldset>
-			<legend>Author datas:</legend>
-			<h:panelGrid columns="2">
+<ui:composition template="_template.xhtml">
 
-				<h:outputLabel value="Name:" for="name" />
-				<h:inputText id="name" value="#{authorBean.author.name}" />
+	<ui:define name="title">New Author</ui:define>
 
-				<h:commandButton value="create" action="#{authorBean.create}" />
+	<ui:define name="context">
+		<h:form>
+			<fieldset>
+				<legend>Author datas:</legend>
+				<h:panelGrid columns="2">
 
-			</h:panelGrid>
-		</fieldset>
-	</h:form>
+					<h:outputLabel value="Name:" for="name" />
+					<h:inputText id="name" value="#{authorBean.author.name}" />
 
-</h:body>
+					<h:commandButton value="create" action="#{authorBean.create}" />
+
+				</h:panelGrid>
+			</fieldset>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
 </html>
