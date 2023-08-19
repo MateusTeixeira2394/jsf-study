@@ -107,6 +107,11 @@ public class BookBean {
 		
 	}
 	
+	public String goToAuthorForm() {
+		
+		return "newAuthor?faces-redirect=true";
+	}
+	
 	public Long getAuthorId() {
 		return authorId;
 	}

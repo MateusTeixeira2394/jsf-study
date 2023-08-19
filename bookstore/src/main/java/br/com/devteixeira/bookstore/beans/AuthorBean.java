@@ -14,17 +14,20 @@ public class AuthorBean {
 		service = new AuthorService();
 	}
 
-	public void create() {
+	public String create() {
 		
 		try {
 
 			service.create(author);
 
+			
 		} catch (RuntimeException e) {
 
 			System.out.println(e.getMessage());
 
 		}
+		
+		return "newBook?faces-redirect=true";
 		
 	}
 

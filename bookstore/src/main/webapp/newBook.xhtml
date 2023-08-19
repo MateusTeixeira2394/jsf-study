@@ -61,6 +61,11 @@
 			<h:commandButton value="add author" action="#{bookBean.saveAuthor}">
 				<f:ajax execute="author" render="authorsTable validationMessages" />
 			</h:commandButton>
+			
+			<br />
+			
+			<h:commandLink value="Add a new author" action="#{bookBean.goToAuthorForm}" immediate="true" />
+			
 			<h3>Authors:</h3>
 			<h:dataTable value="#{bookBean.book.authors}" var="author"
 				id="authorsTable">
